@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="路过山海图标">
+  <rect width="128" height="128" rx="30" fill="#24483c"/>
+  <path d="M18 85 C34 60 43 63 58 82 C72 51 91 38 112 75 L112 104 L18 104 Z" fill="#f6f2e8"/>
+  <path d="M18 93 C39 78 55 79 73 91 C88 101 101 100 112 92 L112 104 L18 104 Z" fill="#4c8aa0"/>
+  <path d="M23 72 C38 62 52 63 68 76 C83 88 96 88 108 80" fill="none" stroke="#d79649" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="94" cy="36" r="9" fill="#d79649"/>
+</svg>

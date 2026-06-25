@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#24483c" />
+    <meta name="description" content="路过山海，一个户外旅行记录、路线规划、拍照打卡和回忆整理的手机端 Web App 原型。" />
+    <meta property="og:title" content="路过山海" />
+    <meta property="og:description" content="世界很大，先从出发开始。记录路线、照片和每一次山海之间的回忆。" />
+    <meta property="og:image" content="./preview.png" />
+    <meta property="og:type" content="website" />
+    <title>路过山海</title>
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-label="路过山海手机端原型">
+      <section class="phone">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">路过山海</p>
+            <h1>世界很大，先从出发开始。</h1>
+          </div>
+          <button class="icon-btn" type="button" aria-label="通知">
+            <span></span>
+          </button>
+        </header>
+
+        <section class="screen active" id="home" aria-label="首页">
+          <article class="hero-card">
+            <img src="./assets/hero-mountain-sea.png" alt="山路通向海面的清晨风景" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+              <p>今日出行</p>
+              <h2>徽杭古道轻徒步</h2>
+              <div class="hero-metrics">
+                <span>12.8 km</span>
+                <span>4.5 小时</span>
+                <span>爬升 620 m</span>
+              </div>
+            </div>
+          </article>
+
+          <section class="weather-strip" aria-label="今日提醒">
+            <div>
+              <strong>多云 22-28°C</strong>
+              <span>山顶风大，建议带防风外套</span>
+            </div>
+            <button class="primary small" type="button" data-tab="track">开始记录</button>
+          </section>
+
+          <section class="section-head">
+            <h2>发现路线</h2>
+            <button type="button" class="text-btn" data-tab="routes">查看全部</button>
+          </section>
+
+          <div class="route-grid">
+            <article class="route-card" data-tab="routes">
+              <div class="route-map mini-map forest">
+                <span class="pin p1"></span>
+                <span class="pin p2"></span>
+                <span class="route-line"></span>
+              </div>
+              <div>
+                <h3>径山古道</h3>
+                <p>竹林、寺院、秋色</p>
+                <div class="tags">
+                  <span>轻徒步</span>
+                  <span>拍照</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="route-card" data-tab="routes">
+              <div class="route-map mini-map coast">
+                <span class="pin p1"></span>
+                <span class="pin p2"></span>
+                <span class="route-line"></span>
+              </div>
+              <div>
+                <h3>青山湖绿道</h3>
+                <p>水杉、湖面、骑行</p>
+                <div class="tags">
+                  <span>新手</span>
+                  <span>日落</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" id="routes" aria-label="路线详情">
+          <section class="route-detail">
+            <div class="detail-map">
+              <span class="map-label start">入口</span>
+              <span class="map-label view">云海机位</span>
+              <span class="map-label peak">山顶</span>
+              <svg viewBox="0 0 320 220" aria-hidden="true">
+                <path d="M24 180 C74 112, 98 176, 142 126 S218 70, 296 38" />
+              </svg>
+            </div>
+            <div class="detail-title">
+              <div>
+                <p class="eyebrow">推荐路线</p>
+                <h2>径山古道半日线</h2>
+              </div>
+              <span class="difficulty">难度 2.5</span>
+            </div>
+            <div class="stats-row">
+              <div><strong>8.6</strong><span>公里</span></div>
+              <div><strong>3.2</strong><span>小时</span></div>
+              <div><strong>410</strong><span>爬升 m</span></div>
+            </div>
+          </section>
+
+          <section class="info-band">
+            <h3>适合你的理由</h3>
+            <p>杭州周边、强度不高，竹林和古道段出片率高。上午出发光线柔和，下午可顺路去村口咖啡休息。</p>
+          </section>
+
+          <section class="photo-spots">
+            <div class="section-head compact">
+              <h2>拍照打卡点</h2>
+              <button type="button" class="text-btn" data-tab="track">去打卡</button>
+            </div>
+            <article class="spot">
+              <span class="spot-dot"></span>
+              <div>
+                <h3>竹林转弯处</h3>
+                <p>09:00-10:30 侧逆光好看，适合人像和路牌合影。</p>
+              </div>
+              <strong>35mm</strong>
+            </article>
+            <article class="spot">
+              <span class="spot-dot amber"></span>
+              <div>
+                <h3>山脊观景台</h3>
+                <p>天气通透时能看到远山层次，适合横构图。</p>
+              </div>
+              <strong>24mm</strong>
+            </article>
+          </section>
+
+          <section class="checklist">
+            <h2>行前清单</h2>
+            <label><input type="checkbox" checked /> 1.5L 水和轻食</label>
+            <label><input type="checkbox" /> 防滑徒步鞋</label>
+            <label><input type="checkbox" /> 防风外套</label>
+            <label><input type="checkbox" checked /> 充电宝</label>
+          </section>
+        </section>
+
+        <section class="screen" id="track" aria-label="记录中">
+          <section class="record-panel">
+            <div class="record-orbit" aria-hidden="true">
+              <span></span>
+            </div>
+            <p class="eyebrow">记录中</p>
+            <h2 id="timer">01:24:36</h2>
+            <div class="stats-row live">
+              <div><strong>5.4</strong><span>公里</span></div>
+              <div><strong>286</strong><span>爬升 m</span></div>
+              <div><strong>13:42</strong><span>预计到顶</span></div>
+            </div>
+            <button class="primary wide" id="addCheckin" type="button">添加拍照打卡</button>
+          </section>
+
+          <section class="timeline" id="checkinList">
+            <article>
+              <span></span>
+              <div>
+                <h3>08:30 古道入口</h3>
+                <p>天气清爽，入口处人不多。</p>
+              </div>
+            </article>
+            <article>
+              <span></span>
+              <div>
+                <h3>10:20 山腰竹林</h3>
+                <p>侧光很好，适合拍背影。</p>
+              </div>
+            </article>
+          </section>
+
+          <section class="safety-card">
+            <h2>安全提醒</h2>
+            <p>当前路线未偏离。预计天黑前 3 小时下山，电量余量充足。</p>
+          </section>
+        </section>
+
+        <section class="screen" id="memory" aria-label="回忆生成">
+          <section class="memory-cover">
+            <img src="./assets/hero-mountain-sea.png" alt="山海路线回忆封面" />
+            <div>
+              <p>自动生成游记</p>
+              <h2>从竹林走到风起的山顶</h2>
+            </div>
+          </section>
+
+          <section class="story-card">
+            <div class="section-head compact">
+              <h2>朋友圈文案</h2>
+              <button type="button" class="text-btn" id="refreshStory">换一版</button>
+            </div>
+            <p id="storyText">从清晨的古道入口出发，到午后的山顶风起，这一路有竹林、远山和一点点累。12.8 公里的徒步，不只是走过一条山路，更像是给生活按下了一次重启键。</p>
+          </section>
+
+          <section class="photo-ribbon" aria-label="照片时间线">
+            <div class="photo-tile one"><span>08:30</span></div>
+            <div class="photo-tile two"><span>10:20</span></div>
+            <div class="photo-tile three"><span>12:10</span></div>
+          </section>
+
+          <section class="export-card">
+            <div>
+              <h2>照片路线地图</h2>
+              <p>4 个打卡点，已整理成一份回忆。</p>
+            </div>
+            <button class="primary small" type="button">导出长图</button>
+          </section>
+        </section>
+
+        <section class="screen" id="profile" aria-label="我的行迹">
+          <section class="profile-card">
+            <p class="eyebrow">我的行迹</p>
+            <h2>你走过的路，正在变成自己的地图。</h2>
+            <div class="stats-row">
+              <div><strong>18</strong><span>路线</span></div>
+              <div><strong>126</strong><span>公里</span></div>
+              <div><strong>5800</strong><span>爬升 m</span></div>
+            </div>
+          </section>
+
+          <section class="badge-grid">
+            <article><span></span><strong>首次登顶</strong><p>已获得</p></article>
+            <article><span></span><strong>云海观察者</strong><p>2/3</p></article>
+            <article><span></span><strong>古道行者</strong><p>已获得</p></article>
+          </section>
+
+          <section class="memory-list">
+            <h2>最近回忆</h2>
+            <article>
+              <div class="thumb forest"></div>
+              <div>
+                <h3>径山古道半日线</h3>
+                <p>8.6 km ｜ 竹林、寺院、山脊风</p>
+              </div>
+            </article>
+            <article>
+              <div class="thumb coast"></div>
+              <div>
+                <h3>青山湖绿道</h3>
+                <p>14.2 km ｜ 水杉、湖面、落日</p>
+              </div>
+            </article>
+          </section>
+        </section>
+
+        <nav class="bottom-nav" aria-label="底部导航">
+          <button class="active" type="button" data-tab="home">首页</button>
+          <button type="button" data-tab="routes">路线</button>
+          <button type="button" data-tab="track">记录</button>
+          <button type="button" data-tab="memory">回忆</button>
+          <button type="button" data-tab="profile">我的</button>
+        </nav>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
