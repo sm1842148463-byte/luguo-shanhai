@@ -245,3 +245,57 @@ if (finishTrip) {
 
 renderStats();
 renderBadges();
+
+
+const photoInput = document.querySelector("#photoInput");
+const photoGrid = document.querySelector("#photoGrid");
+const photoTimeline = document.querySelector("#photoTimeline");
+const photoCount = document.querySelector("#photoCount");
+const profilePhotoCount = document.querySelector("#profilePhotoCount");
+const importedPhotos = [];
+const photoNodes = ["古道入口", "山腰竹林", "山顶合影点", "溪边休息点", "古村落日"];
+
+function renderImportedPhotos() {
+  if (photoCount) photoCount.textContent = importedPhotos.length + " 张";
+  if (profilePhotoCount) profilePhotoCount.textContent = String(236 + importedPhotos.length);
+
+  if (photoGrid) {
+    photoGrid.innerHTML = importedPhotos.map((photo) =>
+      '<article class="imported-photo"><img src="' + photo.src + '" alt="' + photo.name + '"><span>' + photo.name + '</span></article>'
+    ).join("");
+  }
+
+  if (photoTimeline) {
+    if (!importedPhotos.length) {
+      photoTimeline.innerHTML = '<p class="empty-state">导入途中照片后，会自动排成一条旅行时间线。</p>';
+    } else {
+      photoTimeline.innerHTML = importedPhotos.map((photo, index) =>
+        '<article class="timeline-item"><img src="' + photo.src + '" alt="' + photo.name + '"><div><strong>' + photo.time + ' · ' + photo.point + '</strong><span>' + photo.name + '</span></div></article>'
+      ).join("");
+    }
+  }
+
+  if (journalText && importedPhotos.length) {
+    journalText.textContent = "这次路上导入了 " + importedPhotos.length + " 张照片，从古道入口到山顶风起，每一张都被放进了这条照片路线里。";
+  }
+}
+
+if (photoInput) {
+  photoInput.addEventListener("change", () => {
+    const files = Array.from(photoInput.files || []).filter((file) => file.type.startsWith("image/"));
+    files.slice(0, 12 - importedPhotos.length).forEach((file) => {
+      const index = importedPhotos.length;
+      importedPhotos.push({
+        name: file.name,
+        src: URL.createObjectURL(file),
+        time: String(8 + Math.floor(index * 1.5)).padStart(2, "0") + ":" + (index % 2 ? "30" : "10"),
+        point: photoNodes[index % photoNodes.length]
+      });
+    });
+
+    renderImportedPhotos();
+    if (rewardMessage) rewardMessage.textContent = "已导入 " + importedPhotos.length + " 张途中照片。";
+  });
+}
+
+renderImportedPhotos();
