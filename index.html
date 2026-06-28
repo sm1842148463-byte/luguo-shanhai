@@ -12,7 +12,7 @@
     <title>路过山海</title>
     <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css?v=product2" />
+    <link rel="stylesheet" href="./styles.css?v=photos1" />
   </head>
   <body>
     <main class="app-shell">
@@ -91,26 +91,10 @@
               <button>周末</button>
             </div>
             <div class="route-list">
-              <button class="route-item" data-route="huigang">
-                <strong>徽杭古道轻徒步</strong>
-                <span>12.8km · 爬升620m · 春秋最佳</span>
-                <small>古道、竹林、山脊风景，新手需有基础体力。</small>
-              </button>
-              <button class="route-item" data-route="qingshan">
-                <strong>青山湖绿道</strong>
-                <span>10.6km · 几乎无爬升 · 四季可去</span>
-                <small>水杉、湖面、日落，适合亲子和骑行。</small>
-              </button>
-              <button class="route-item" data-route="jingshan">
-                <strong>径山古道</strong>
-                <span>7.2km · 爬升360m · 秋色推荐</span>
-                <small>寺院、竹林、茶山，适合拍照和半日轻徒步。</small>
-              </button>
-              <button class="route-item" data-route="moganshan">
-                <strong>莫干山竹海线</strong>
-                <span>14.1km · 爬升780m · 中等难度</span>
-                <small>竹海和民国建筑，适合有经验的周末徒步。</small>
-              </button>
+              <button class="route-item" data-route="huigang"><strong>徽杭古道轻徒步</strong><span>12.8km · 爬升620m · 春秋最佳</span><small>古道、竹林、山脊风景，新手需有基础体力。</small></button>
+              <button class="route-item" data-route="qingshan"><strong>青山湖绿道</strong><span>10.6km · 几乎无爬升 · 四季可去</span><small>水杉、湖面、日落，适合亲子和骑行。</small></button>
+              <button class="route-item" data-route="jingshan"><strong>径山古道</strong><span>7.2km · 爬升360m · 秋色推荐</span><small>寺院、竹林、茶山，适合拍照和半日轻徒步。</small></button>
+              <button class="route-item" data-route="moganshan"><strong>莫干山竹海线</strong><span>14.1km · 爬升780m · 中等难度</span><small>竹海和民国建筑，适合有经验的周末徒步。</small></button>
             </div>
           </section>
 
@@ -132,6 +116,15 @@
               <article><strong>山腰竹林</strong><span>10:00-11:00 · 适合人像</span></article>
               <article><strong>古村落日</strong><span>16:30-17:20 · 适合长焦</span></article>
             </div>
+            <article class="photo-card">
+              <div class="section-title compact inline-title">
+                <h2>照片路线</h2>
+                <span class="pill" id="photoCount">0 张</span>
+              </div>
+              <div class="photo-timeline" id="photoTimeline">
+                <p class="empty-state">导入途中照片后，会自动排成一条旅行时间线。</p>
+              </div>
+            </article>
           </section>
 
           <section class="tab-panel" data-tab-panel="record">
@@ -143,6 +136,19 @@
               <button class="secondary-action full" id="finishTrip">完成本次出发</button>
               <p class="reward-message" id="rewardMessage" aria-live="polite"></p>
             </div>
+
+            <article class="photo-card">
+              <p class="eyebrow">途中照片</p>
+              <h2>导入照片，生成照片地图</h2>
+              <p>选择这次徒步中拍的照片，系统会按导入顺序生成时间线和回忆素材。</p>
+              <label class="upload-zone" for="photoInput">
+                <strong>选择照片</strong>
+                <span>支持多选，照片只保存在当前浏览器里</span>
+              </label>
+              <input id="photoInput" class="photo-input" type="file" accept="image/*" multiple />
+              <div class="photo-grid" id="photoGrid"></div>
+            </article>
+
             <article class="journal-card">
               <p class="eyebrow">自动游记</p>
               <h2>从山脚到风起的山顶</h2>
@@ -165,7 +171,7 @@
             </div>
             <div class="stats-grid">
               <span><strong>18</strong>条路线</span>
-              <span><strong>236</strong>张照片</span>
+              <span><strong id="profilePhotoCount">236</strong>张照片</span>
               <span><strong>7</strong>座山</span>
               <span><strong>12</strong>个古村</span>
             </div>
@@ -176,9 +182,7 @@
             <div class="badge-grid" id="badgeGrid" aria-label="山野徽章列表"></div>
             <article class="checklist-card">
               <p class="eyebrow">行前清单</p>
-              <div class="checklist">
-                <span>水</span><span>充电宝</span><span>防晒</span><span>登山杖</span><span>雨衣</span><span>垃圾袋</span>
-              </div>
+              <div class="checklist"><span>水</span><span>充电宝</span><span>防晒</span><span>登山杖</span><span>雨衣</span><span>垃圾袋</span></div>
             </article>
           </section>
         </section>
@@ -194,12 +198,10 @@
     </main>
 
     <dialog class="route-dialog" id="routeDialog">
-      <form method="dialog">
-        <button class="dialog-close" aria-label="关闭">×</button>
-      </form>
+      <form method="dialog"><button class="dialog-close" aria-label="关闭">×</button></form>
       <div id="routeDialogContent"></div>
     </dialog>
 
-    <script src="./app.js?v=product2"></script>
+    <script src="./app.js?v=photos1"></script>
   </body>
 </html>
