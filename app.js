@@ -252,8 +252,18 @@ const photoGrid = document.querySelector("#photoGrid");
 const photoTimeline = document.querySelector("#photoTimeline");
 const photoCount = document.querySelector("#photoCount");
 const profilePhotoCount = document.querySelector("#profilePhotoCount");
+const saveCheckin = document.querySelector("#saveCheckin");
+const checkinPoint = document.querySelector("#checkinPoint");
+const checkinNote = document.querySelector("#checkinNote");
+const selectedPhotoHint = document.querySelector("#selectedPhotoHint");
 const importedPhotos = [];
-const photoNodes = ["古道入口", "山腰竹林", "山顶合影点", "溪边休息点", "古村落日"];
+let pendingFiles = [];
+
+function currentCheckinTime(offset) {
+  const baseHour = 8 + Math.floor((importedPhotos.length + offset) * 1.2);
+  const minute = (importedPhotos.length + offset) % 2 ? "30" : "10";
+  return String(Math.min(baseHour, 18)).padStart(2, "0") + ":" + minute;
+}
 
 function renderImportedPhotos() {
   if (photoCount) photoCount.textContent = importedPhotos.length + " 张";
@@ -261,41 +271,71 @@ function renderImportedPhotos() {
 
   if (photoGrid) {
     photoGrid.innerHTML = importedPhotos.map((photo) =>
-      '<article class="imported-photo"><img src="' + photo.src + '" alt="' + photo.name + '"><span>' + photo.name + '</span></article>'
+      '<article class="imported-photo"><img src="' + photo.src + '" alt="' + photo.name + '"><strong>' + photo.point + '</strong><span>' + photo.name + '</span></article>'
     ).join("");
   }
 
   if (photoTimeline) {
     if (!importedPhotos.length) {
-      photoTimeline.innerHTML = '<p class="empty-state">导入途中照片后，会自动排成一条旅行时间线。</p>';
+      photoTimeline.innerHTML = '<p class="empty-state">在记录页完成打卡后，会自动排成一条旅行时间线。</p>';
     } else {
-      photoTimeline.innerHTML = importedPhotos.map((photo, index) =>
-        '<article class="timeline-item"><img src="' + photo.src + '" alt="' + photo.name + '"><div><strong>' + photo.time + ' · ' + photo.point + '</strong><span>' + photo.name + '</span></div></article>'
+      photoTimeline.innerHTML = importedPhotos.map((photo) =>
+        '<article class="timeline-item"><img src="' + photo.src + '" alt="' + photo.name + '"><div><strong>' + photo.time + ' · ' + photo.point + '</strong><span>' + photo.name + '</span><p>' + photo.note + '</p></div></article>'
       ).join("");
     }
   }
 
   if (journalText && importedPhotos.length) {
-    journalText.textContent = "这次路上导入了 " + importedPhotos.length + " 张照片，从古道入口到山顶风起，每一张都被放进了这条照片路线里。";
+    const points = [...new Set(importedPhotos.map((photo) => photo.point))].join("、");
+    journalText.textContent = "这次路上完成了 " + importedPhotos.length + " 张照片打卡，经过 " + points + "，每个点都被放进了这条照片路线里。";
   }
+}
+
+function updatePendingHint() {
+  if (!selectedPhotoHint) return;
+  selectedPhotoHint.textContent = pendingFiles.length ? "已选择 " + pendingFiles.length + " 张，点保存打卡写入路线。" : "还没有选择照片";
 }
 
 if (photoInput) {
   photoInput.addEventListener("change", () => {
-    const files = Array.from(photoInput.files || []).filter((file) => file.type.startsWith("image/"));
-    files.slice(0, 12 - importedPhotos.length).forEach((file) => {
-      const index = importedPhotos.length;
+    pendingFiles = Array.from(photoInput.files || []).filter((file) => file.type.startsWith("image/"));
+    updatePendingHint();
+  });
+}
+
+if (saveCheckin) {
+  saveCheckin.addEventListener("click", () => {
+    if (!pendingFiles.length) {
+      if (selectedPhotoHint) selectedPhotoHint.textContent = "请先选择本次打卡照片。";
+      return;
+    }
+
+    const point = checkinPoint ? checkinPoint.value : "临时发现点";
+    const note = checkinNote && checkinNote.value.trim() ? checkinNote.value.trim() : "路上随手记录的一刻。";
+    pendingFiles.slice(0, 12 - importedPhotos.length).forEach((file, index) => {
       importedPhotos.push({
         name: file.name,
         src: URL.createObjectURL(file),
-        time: String(8 + Math.floor(index * 1.5)).padStart(2, "0") + ":" + (index % 2 ? "30" : "10"),
-        point: photoNodes[index % photoNodes.length]
+        time: currentCheckinTime(index),
+        point,
+        note
       });
     });
 
+    pendingFiles = [];
+    if (photoInput) photoInput.value = "";
+    if (checkinNote) checkinNote.value = "";
+    updatePendingHint();
     renderImportedPhotos();
-    if (rewardMessage) rewardMessage.textContent = "已导入 " + importedPhotos.length + " 张途中照片。";
+    if (rewardMessage) rewardMessage.textContent = "已在「" + point + "」保存照片打卡。";
   });
 }
+
+document.querySelectorAll(".map-pin").forEach((pin) => {
+  pin.addEventListener("click", () => {
+    if (checkinPoint) checkinPoint.value = pin.dataset.photo || "临时发现点";
+    if (selectedPhotoHint) selectedPhotoHint.textContent = "已选中点位：「" + (pin.dataset.photo || "临时发现点") + "」，可以上传照片打卡。";
+  });
+});
 
 renderImportedPhotos();
