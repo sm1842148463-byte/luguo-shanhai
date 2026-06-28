@@ -12,7 +12,7 @@
     <title>路过山海</title>
     <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="stylesheet" href="./styles.css?v=photos1" />
+    <link rel="stylesheet" href="./styles.css?v=checkin1" />
   </head>
   <body>
     <main class="app-shell">
@@ -122,7 +122,7 @@
                 <span class="pill" id="photoCount">0 张</span>
               </div>
               <div class="photo-timeline" id="photoTimeline">
-                <p class="empty-state">导入途中照片后，会自动排成一条旅行时间线。</p>
+                <p class="empty-state">在记录页完成打卡后，会自动排成一条旅行时间线。</p>
               </div>
             </article>
           </section>
@@ -137,15 +137,32 @@
               <p class="reward-message" id="rewardMessage" aria-live="polite"></p>
             </div>
 
-            <article class="photo-card">
-              <p class="eyebrow">途中照片</p>
-              <h2>导入照片，生成照片地图</h2>
-              <p>选择这次徒步中拍的照片，系统会按导入顺序生成时间线和回忆素材。</p>
+            <article class="photo-card checkin-card">
+              <p class="eyebrow">路线打卡</p>
+              <h2>随时打卡上传照片</h2>
+              <p>在路线中选择当前位置、写一句备注、选择照片，就能生成一条照片路线记录。</p>
+              <div class="checkin-form">
+                <label>当前点位
+                  <select id="checkinPoint">
+                    <option>古道入口</option>
+                    <option>山腰竹林</option>
+                    <option>山顶合影点</option>
+                    <option>溪边休息点</option>
+                    <option>古村落日</option>
+                    <option>临时发现点</option>
+                  </select>
+                </label>
+                <label>打卡备注
+                  <input id="checkinNote" type="text" placeholder="比如：风很大，云开了一瞬间" />
+                </label>
+              </div>
               <label class="upload-zone" for="photoInput">
-                <strong>选择照片</strong>
+                <strong>选择本次打卡照片</strong>
                 <span>支持多选，照片只保存在当前浏览器里</span>
               </label>
               <input id="photoInput" class="photo-input" type="file" accept="image/*" multiple />
+              <button class="primary-action full" id="saveCheckin">保存打卡</button>
+              <p class="empty-state" id="selectedPhotoHint">还没有选择照片</p>
               <div class="photo-grid" id="photoGrid"></div>
             </article>
 
@@ -202,6 +219,6 @@
       <div id="routeDialogContent"></div>
     </dialog>
 
-    <script src="./app.js?v=photos1"></script>
+    <script src="./app.js?v=checkin1"></script>
   </body>
 </html>
