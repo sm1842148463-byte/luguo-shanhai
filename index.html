@@ -92,8 +92,10 @@
             <div class="record-card">
               <p class="eyebrow">正在记录</p>
               <h2 id="timer">00:00:00</h2>
-              <p>点击下方按钮模拟开始/暂停，后续可以接入真实定位和轨迹保存。</p>
+              <p>点击下方按钮模拟开始/暂停，完成一次出发后会解锁新勋章。</p>
               <button class="primary-action full" id="toggleTimer">开始</button>
+              <button class="secondary-action full" id="finishTrip">完成本次出发</button>
+              <p class="reward-message" id="rewardMessage" aria-live="polite"></p>
             </div>
           </section>
 
@@ -113,9 +115,15 @@
               <div class="avatar">山</div>
               <div>
                 <h2>山海旅人</h2>
-                <p>已记录 16 次出发，累计 128.4 km。</p>
+                <p>已记录 <strong id="tripCount">16</strong> 次出发，累计 <strong id="distanceCount">128.4</strong> km。</p>
               </div>
             </div>
+
+            <div class="section-title compact">
+              <h2>山海勋章</h2>
+              <span class="pill" id="badgeCount">3/6 已获得</span>
+            </div>
+            <div class="badge-grid" id="badgeGrid" aria-label="山海勋章列表"></div>
           </section>
         </section>
 
