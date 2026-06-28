@@ -75,7 +75,12 @@ const badges = [
 const earnedKey = "luguo-shanhai-earned-badges";
 const countKey = "luguo-shanhai-trip-count";
 const distanceKey = "luguo-shanhai-distance-count";
-let earnedBadges = JSON.parse(localStorage.getItem(earnedKey) || '["first","summit","ten"]');
+const defaultBadges = ["first", "summit", "ten"];
+const badgeMigration = { photo: "cloud", sunset: "sunrise", climb: "summit", weekend: "ten" };
+const badgeIds = badges.map((badge) => badge.id);
+let storedBadges = JSON.parse(localStorage.getItem(earnedKey) || JSON.stringify(defaultBadges));
+let earnedBadges = [...new Set(storedBadges.map((id) => badgeMigration[id] || id).filter((id) => badgeIds.includes(id)))];
+if (!earnedBadges.length) earnedBadges = defaultBadges;
 let tripCountValue = Number(localStorage.getItem(countKey) || 16);
 let distanceValue = Number(localStorage.getItem(distanceKey) || 128.4);
 
